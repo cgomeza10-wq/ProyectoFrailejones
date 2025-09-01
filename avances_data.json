@@ -1,0 +1,24 @@
+
+{
+  "primer_corte": [
+    "Revisión bibliográfica sobre el papel de los frailejones en los ecosistemas de páramo",
+    "Identificación de especies de frailejones endémicas de Colombia",
+    "Análisis preliminar de la distribución geográfica de los frailejones",
+    "Definición de parámetros iniciales para el modelo matemático",
+    "Implementación de la estructura básica de la aplicación en Streamlit"
+  ],
+  "segundo_corte": [
+    "Desarrollo del modelo matemático para simular el impacto de la pérdida de frailejones",
+    "Implementación de ecuaciones diferenciales para modelar la dinámica del ecosistema",
+    "Creación de visualizaciones 2D para mostrar relaciones entre variables",
+    "Integración de datos específicos de regiones colombianas (Boyacá, Cundinamarca, etc.)",
+    "Validación preliminar del modelo con datos reales de páramos"
+  ],
+  "tercer_corte": [
+    "Desarrollo de visualizaciones 3D interactivas con Plotly",
+    "Implementación del mapa de riesgo con Folium para páramos colombianos",
+    "Creación de métricas económicas y de biodiversidad específicas",
+    "Desarrollo de la interfaz de usuario final con controles avanzados",
+    "Documentación completa del proyecto y validación final del modelo"
+  ]
+}
