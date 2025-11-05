@@ -76,10 +76,9 @@ st.markdown("<div class='card'>", unsafe_allow_html=True)
 st.markdown("<h2 class='sub-header'>Acerca de esta Aplicación</h2>", unsafe_allow_html=True)
 st.markdown("""
 <p class='description'>
-Este proyecto tiene como objetivo modelar el impacto crítico de la pérdida de frailejones en los ecosistemas de páramo 
-de Colombia. La aplicación utiliza métodos numéricos avanzados y modelos matemáticos para simular cómo diferentes 
-niveles de población de frailejones afectan la biodiversidad, la regulación hídrica y los servicios ecosistémicos 
-que estos ecosistemas únicos proporcionan al país.
+Este proyecto tiene como objetivo modelar y proyectar la dinámica futura de los frailejones en los ecosistemas de páramo de Colombia. 
+A través de métodos numéricos avanzados y modelos matemáticos, la aplicación simula distintos escenarios ecológicos y climáticos 
+para estimar cómo podrían evolucionar la biodiversidad, la regulación hídrica y los servicios ecosistémicos que estos ecosistemas estratégicos brindan al país en los próximos 40 años.
 </p>
 """, unsafe_allow_html=True)
 
@@ -96,11 +95,10 @@ y a la estabilidad climática regional.</p>
 st.markdown("<h3>Objetivos del Proyecto</h3>", unsafe_allow_html=True)
 st.markdown("""
 <ul>
-    <li><strong>Educación y concienciación:</strong> Crear conciencia sobre la importancia crítica de los frailejones para los ecosistemas de páramo</li>
-    <li><strong>Simulación científica:</strong> Proporcionar una herramienta educativa que muestre visualmente el impacto de la pérdida de frailejones</li>
-    <li><strong>Datos específicos:</strong> Ofrecer información detallada sobre páramos colombianos para la toma de decisiones</li>
-    <li><strong>Conservación:</strong> Promover acciones de conservación de páramos a nivel individual, institucional y gubernamental</li>
-    <li><strong>Investigación aplicada:</strong> Facilitar el estudio de métodos numéricos aplicados a ecosistemas de alta montaña</li>
+    <li><strong>Implementación:</strong> Implementar modelos numéricos para simular la dinámica poblacional de frailejones y proyectar escenarios en diferentes horizontes temporales.</li>
+    <li><strong>Desarrollo:</strong> Desarrollar una interfaz interactiva que permita visualizar geoespacialmente la distribución actual y proyectada de frailejones en los páramos de Colombia.</li>
+    <li><strong>Cuantificación:</strong> Cuantificar el impacto ecológico mediante indicadores numéricos que relacionen la densidad de frailejones con la provisión de servicios ecosistémicos.</li>
+    <li><strong>Generación:</strong>Generar herramientas educativas basadas en simulaciones numéricas que faciliten la comprensión de la importancia de los frailejones para la conservación.</li>
 </ul>
 """, unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
@@ -152,7 +150,7 @@ st.markdown("""
 </ol>
 """, unsafe_allow_html=True)
 
-st.markdown("<h3>📊 Fuentes de Datos Científicos</h3>", unsafe_allow_html=True)
+st.markdown("<h3>Fuentes de Datos Científicos</h3>", unsafe_allow_html=True)
 st.markdown("""
 <ul>
     <li><strong>Instituto Alexander von Humboldt:</strong> Datos de biodiversidad y distribución de frailejones en Colombia</li>
@@ -169,7 +167,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 st.markdown("<h2 class='sub-header'>Aspectos Técnicos y Desarrollo</h2>", unsafe_allow_html=True)
 
-st.markdown("<h3>⚙️ Arquitectura del Sistema</h3>", unsafe_allow_html=True)
+st.markdown("<h3>Arquitectura del Sistema</h3>", unsafe_allow_html=True)
 st.markdown("""
 <p class='description'>
 El proyecto está desarrollado siguiendo principios de programación científica y buenas prácticas de desarrollo:
@@ -182,7 +180,7 @@ El proyecto está desarrollado siguiendo principios de programación científica
     <li><strong>Interactividad:</strong> Interfaz intuitiva que permite explorar diferentes escenarios</li>
 </ul>
 
-<h3>🛠️ Herramientas y Tecnologías</h3>
+<h3>Herramientas y Tecnologías</h3>
 <ul>
     <li><strong>Python:</strong> Lenguaje principal para cálculos científicos y modelado</li>
     <li><strong>NumPy/SciPy:</strong> Bibliotecas para métodos numéricos y computación científica</li>
@@ -204,7 +202,7 @@ Este proyecto forma parte del curso de <strong>Métodos Numéricos</strong> de l
 segundo semestre de 2025, donde se aplican conceptos teóricos a problemas reales de conservación ambiental.
 </p>
 
-<h3>🎓 Competencias Desarrolladas</h3>
+<h3>Competencias Desarrolladas</h3>
 <ul>
     <li><strong>Modelado matemático:</strong> Traducción de problemas ecológicos a ecuaciones matemáticas</li>
     <li><strong>Programación científica:</strong> Implementación de algoritmos numéricos en Python</li>
@@ -213,7 +211,7 @@ segundo semestre de 2025, donde se aplican conceptos teóricos a problemas reale
     <li><strong>Comunicación científica:</strong> Presentación clara de resultados complejos</li>
 </ul>
 
-<h3>🌍 Impacto Social y Ambiental</h3>
+<h3>Impacto Social y Ambiental</h3>
 <p class='description'>
 El proyecto demuestra cómo las matemáticas y la programación pueden contribuir a la solución de problemas 
 ambientales críticos, conectando el aprendizaje académico con la realidad nacional y la urgencia de 
@@ -234,7 +232,7 @@ st.markdown("""
     <li><strong>Ministerio de Ambiente y Desarrollo Sostenible:</strong> Políticas de conservación de páramos</li>
 </ul>
 
-<h3>📚 Referencias Científicas Principales</h3>
+<h3>Referencias Científicas Principales</h3>
 <ul>
     <li>Luteyn, J.L. (1999). Páramos: A checklist of plant diversity, geographical distribution, and botanical literature</li>
     <li>Rangel-Ch, J.O. (2000). Colombia Diversidad Biótica III: La región de vida paramuna</li>
@@ -243,7 +241,7 @@ st.markdown("""
     <li>Young, K.R. et al. (2002). Plant evolution and endemism in Andean South America</li>
 </ul>
 
-<h3>💻 Tecnologías Open Source</h3>
+<h3>Tecnologías Open Source</h3>
 <ul>
     <li><strong>Python Scientific Stack:</strong> NumPy, SciPy, Pandas, Matplotlib</li>
     <li><strong>Streamlit:</strong> Framework de aplicaciones web para ciencia de datos</li>

@@ -1,18 +1,20 @@
-
 {
   "primer_corte": [
-    "Revisión bibliográfica sobre el papel de los frailejones en los ecosistemas de páramo",
-    "Identificación de especies de frailejones endémicas de Colombia",
-    "Análisis preliminar de la distribución geográfica de los frailejones",
-    "Definición de parámetros iniciales para el modelo matemático",
-    "Implementación de la estructura básica de la aplicación en Streamlit"
+    "1. Realizar una portada con: Título del proyecto, nombres de los integrantes del proyecto, nombre del docente, y demás información que debe contener una portada de un proyecto.",
+    "2.  Objetivos: Un objetivo general y los objetivos específicos.",
+    "3. Cronograma de actividades: En una tabla.",
+    "4. Planteamiento del problema.",
+    "5. Marco teórico."
   ],
   "segundo_corte": [
-    "Desarrollo del modelo matemático para simular el impacto de la pérdida de frailejones",
-    "Implementación de ecuaciones diferenciales para modelar la dinámica del ecosistema",
-    "Creación de visualizaciones 2D para mostrar relaciones entre variables",
-    "Integración de datos específicos de regiones colombianas (Boyacá, Cundinamarca, etc.)",
-    "Validación preliminar del modelo con datos reales de páramos"
+    "1.  Resumen del proyecto",
+    "2. Introducción",
+    "3. Justificación del proyecto",
+    "4. Marco metodológico.",
+    "5. Desarrollo del proyecto",
+    "6. Diagrama de flujo del algoritmo que van a programar o del programa que van a realizar en el proyecto.",
+    "7. Bibliografía.",
+    "8. Parte del programa."
   ],
   "tercer_corte": [
     "Desarrollo de visualizaciones 3D interactivas con Plotly",

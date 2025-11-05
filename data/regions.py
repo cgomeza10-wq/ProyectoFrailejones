@@ -241,4 +241,16 @@ def get_frailejon_regions():
     ]
     return paramos
 
+def get_regional_multipliers():
+    paramos = get_frailejon_regions()
+    total_area = sum(p["area"] for p in paramos)
+
+    multipliers = {
+        p["name"]: p["area"] / total_area
+        for p in paramos
+    }
+
+    # Agregamos la opción de todos los páramos
+    multipliers["Todos los páramos"] = 1.0
+    return multipliers
 

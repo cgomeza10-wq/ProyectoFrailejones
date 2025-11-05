@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+from data.regions import get_frailejon_regions
 import plotly.express as px
 from streamlit_folium import st_folium
 import streamlit.components.v1 as components
@@ -198,18 +199,17 @@ def save_avances(avances_data):
         json.dump(avances_data, f, ensure_ascii=False, indent=2)
 
 # Header
-st.markdown(f"<h1 class='main-header'>🌿 Impacto de la Pérdida de Frailejones en Ecosistemas de Páramo - Colombia</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 class='main-header'>🌿 Proyección de la Permanencia de Frailejones en Páramos Colombianos 🌿</h1>", unsafe_allow_html=True)
 
 # Introduction
 with st.container():
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("<h2 class='sub-header'>Sobre esta aplicación</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 class='sub-header'>🌱 Sobre esta aplicación 🌱</h2>", unsafe_allow_html=True)
     st.markdown("""
     <p class='description'>
-    Esta aplicación modela el impacto crítico de la disminución de las poblaciones de frailejones en la biodiversidad y 
-    la regulación hídrica de los páramos colombianos. A través de visualizaciones interactivas y modelos matemáticos 
-    basados en métodos numéricos, podrás explorar cómo los cambios en las poblaciones de frailejones afectan a los 
-    ecosistemas de alta montaña y los servicios ecosistémicos que proporcionan.
+Esta aplicación proyecta la evolución de las poblaciones de frailejones y su influencia en la biodiversidad y la regulación hídrica de los páramos colombianos. 
+Mediante visualizaciones interactivas y modelos matemáticos basados en métodos numéricos,permite explorar diferentes escenarios ecológicos y climáticos,
+comprendiendo cómo podrían transformarse los ecosistemas de alta montaña y los servicios que brindan en los próximos años.
     </p>
     """, unsafe_allow_html=True)
 
@@ -294,15 +294,12 @@ with col_avances3:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# Main content in two columns
 col1, col2 = st.columns([2, 3])
 
-# Left column - Controls and information
 with col1:
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h2 class='sub-header'>Controles de Simulación</h2>", unsafe_allow_html=True)
 
-    # Slider for frailejón population adjustment
     frailejon_population_percentage = st.slider(
         "🌿Porcentaje de población de frailejones respecto al nivel óptimo",
         min_value=10,
@@ -312,24 +309,21 @@ with col1:
         help="Ajusta el porcentaje de la población de frailejones para ver el impacto en el páramo"
     )
 
-    # Additional parameters
+    # Obtener dinámicamente la lista de páramos
+    paramos = get_frailejon_regions()
+    region_names = [p["name"] for p in paramos]  # extrae solo los nombres
+    region_names.insert(0, "Todos los páramos")  # agregamos la opción general
+
     st.markdown("<h3>Parámetros del Ecosistema</h3>", unsafe_allow_html=True)
 
     selected_region = st.selectbox(
         "🏞️ Páramo/Región de Colombia",
-        options=["Todos los páramos", "Páramo de Sumapaz", "Páramo de Chingaza", "Páramo de Guerrero", 
-                "Páramo de Rabanal", "Páramo de Pisba", "Páramo de Almorzadero", "Páramo de Santurbán"],
+        options=region_names,
         help="Selecciona un páramo específico para analizar"
     )
+    # ecuacines difrenciales ordinarias- representacion de como cambia la poblacion de frailejones y las variables del ecosistema
 
-    years_to_simulate = st.slider(
-        "🕰️ Años a simular",
-        min_value=1,
-        max_value=40,
-        value=15,
-        step=1
-    )
-
+# analisis de sistemas dinamicos - evolucion del ecosistema durante varios años (estable, moderado, severo)
     ecosystem_resilience = st.select_slider(
         "🔄 Resiliencia del páramo",
         options=["Muy baja", "Baja", "Media", "Alta", "Muy alta"],
@@ -353,10 +347,19 @@ with col1:
         "Muy alta": 1.0
     }
     resilience_value = resilience_mapping[ecosystem_resilience]
+    
+    years_to_simulate = st.slider(
+        "🕰️ Años a simular",
+        min_value=1,
+        max_value=40,
+        value=15,
+        step=1,
+        help="Selecciona cuántos años simular para observar la evolución del ecosistema."
+    )
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Importance of frailejones section
+    # Importncia de los frailejones
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h2 class='sub-header'>Importancia de los Frailejones</h2>", unsafe_allow_html=True)
     st.markdown("""
@@ -386,21 +389,61 @@ with col1:
         """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Right column - Visualizations
 with col2:
-    # Calculate impacts based on the slider and parameters
     biodiversity_impact = calculate_biodiversity_impact(frailejon_population_percentage, resilience_value)
     water_regulation_impact = frailejon_population_percentage
     ecosystem_data = create_ecosystem_simulation(frailejon_population_percentage, years_to_simulate, resilience_value)
 
-    # Metrics display
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("<h2 class='sub-header'>Impacto Calculado</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 class='sub-header'>Impacto Calculador</h2>", unsafe_allow_html=True)
 
-    metric_col1, metric_col2, metric_col3 = st.columns(3)
-    with metric_col1:
+    # Cargar lista de páramos con sus datos
+    paramos = get_frailejon_regions()
+    region_info = next((p for p in paramos if p["name"] == selected_region), None)
+
+    # Valores base globales
+    base_species = 3000
+    water_base = 450
+    carbon_base = 15000
+
+    # Ajuste por región seleccionada
+    if region_info:
+        frailejon_density = region_info.get("frailejon_density", 100)
+        region_modifier = frailejon_density / 100  # Escala según densidad
+        area = region_info.get("area", 1000)
+
+        # Ajustes de bases por región
+        base_species = int(base_species * region_modifier)
+        water_base = water_base * (area / 1000) * region_modifier
+        carbon_base = int(carbon_base * region_modifier)
+    else:
+        region_modifier = 1.0
+
+    # Cálculos principales
+    species_at_risk = int(max(0, 100 - frailejon_population_percentage) * 0.25 * base_species / 100)
+    water_loss = water_base * (max(0, 100 - frailejon_population_percentage) / 100)
+    carbon_loss = int(carbon_base * (max(0, 100 - frailejon_population_percentage) / 100) * 0.6)
+    adjusted_biodiversity = min(100, biodiversity_impact * region_modifier)
+
+    st.markdown("""
+    <style>
+    .metric-card {
+        background-color: #e6f4ea; /* verde claro */
+        border: 1px solid #81c784; /* borde verde */
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 0px;
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Crear dos columnas
+    col1, col2 = st.columns(2)
+
+    # === Columna 1 ===
+    with col1:
         st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-
         climate_modifier = 1.0
         if climate_scenario == "Calentamiento moderado":
             climate_modifier = 0.9
@@ -408,7 +451,6 @@ with col2:
             climate_modifier = 0.75
 
         adjusted_water_impact = min(100, water_regulation_impact * climate_modifier)
-
         st.metric(
             label="🪴 Regulación Hídrica",
             value=f"{adjusted_water_impact:.1f}%",
@@ -417,89 +459,16 @@ with col2:
         )
         st.markdown("</div>", unsafe_allow_html=True)
 
-    with metric_col2:
         st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-
-        region_modifier = 1.0
-        region_name = "Colombia"
-
-        if selected_region == "Páramo de Sumapaz":
-            region_modifier = 1.2
-            region_name = "Sumapaz"
-        elif selected_region == "Páramo de Chingaza":
-            region_modifier = 1.15
-            region_name = "Chingaza"
-        elif selected_region == "Páramo de Santurbán":
-            region_modifier = 1.3
-            region_name = "Santurbán"
-
-        adjusted_biodiversity = biodiversity_impact * region_modifier
-        adjusted_biodiversity = min(100, adjusted_biodiversity)
-
         st.metric(
-            label=f"🌱 Biodiversidad en {region_name}",
-            value=f"{adjusted_biodiversity:.1f}%",
-            delta=f"{adjusted_biodiversity - 100:.1f}%" if frailejon_population_percentage < 100 else None,
-            delta_color="inverse"
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    with metric_col3:
-        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-
-        base_species = 3000  # Especies de páramo
-        if selected_region != "Todos los páramos":
-            if selected_region in ["Páramo de Sumapaz", "Páramo de Chingaza"]:
-                base_species = 1200
-            else:
-                base_species = 800
-
-        species_at_risk = int(max(0, 100 - frailejon_population_percentage) * 0.25 * base_species / 100)
-
-        st.metric(
-            label="⚠️ Especies en Riesgo por pérdida de frailejones",
+            label="⚠️ Especies en Riesgo",
             value=f"{species_at_risk:,}",
             delta=f"+{species_at_risk}" if frailejon_population_percentage < 100 else "0",
             delta_color="inverse"
         )
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # Add additional metrics
-    st.markdown("<div style='padding: 10px;'>", unsafe_allow_html=True)
-    metric_col4, metric_col5 = st.columns(2)
-
-    with metric_col4:
         st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-
-        water_base = 450  # Millones de litros/día
-        if selected_region != "Todos los páramos":
-            if selected_region in ["Páramo de Chingaza", "Páramo de Sumapaz"]:
-                water_base = 180
-            else:
-                water_base = 80
-
-        water_loss = water_base * (max(0, 100 - frailejon_population_percentage) / 100)
-
-        st.metric(
-            label="💧 Pérdida de Regulación Hídrica",
-            value=f"{water_loss:.1f}M L/día",
-            delta=f"-{water_loss:.1f}M" if frailejon_population_percentage < 100 else "0",
-            delta_color="inverse"
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    with metric_col5:
-        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-
-        carbon_base = 15000  # Toneladas CO2
-        if selected_region != "Todos los páramos":
-            if selected_region in ["Páramo de Sumapaz", "Páramo de Chingaza"]:
-                carbon_base = 6000
-            else:
-                carbon_base = 3000
-
-        carbon_loss = int(carbon_base * (max(0, 100 - frailejon_population_percentage) / 100) * 0.6)
-
         st.metric(
             label="🌳 Pérdida de Captura CO₂",
             value=f"{carbon_loss:,} Ton",
@@ -508,12 +477,31 @@ with col2:
         )
         st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
 
-    # Visualizations
+    # === Columna 2 ===
+    with col2:
+        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
+        st.metric(
+            label=f"🌱 Biodiversidad en {selected_region}",
+            value=f"{adjusted_biodiversity:.1f}%",
+            delta=f"{adjusted_biodiversity - 100:.1f}%" if frailejon_population_percentage < 100 else None,
+            delta_color="inverse"
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
+        st.metric(
+            label="💧 Pérdida de Regulación Hídrica",
+            value=f"{water_loss:.1f}M L/día",
+            delta=f"-{water_loss:.1f}M" if frailejon_population_percentage < 100 else "0",
+            delta_color="inverse"
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # === Visualización ===
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h2 class='sub-header'>🌿 Frailejones y su impacto en el páramo</h2>", unsafe_allow_html=True)
+
 
     viz_type = st.radio(
         "Selecciona tipo de visualización",
@@ -534,6 +522,12 @@ with col2:
         </p>
         """, unsafe_allow_html=True)
     else:
+        ecosystem_data = create_ecosystem_simulation(
+        frailejon_population_percentage,
+        years_to_simulate,
+        resilience_value
+       )
+            
         fig_relationship_3d = plot_frailejon_crop_relationship_3d(frailejon_population_percentage, years_to_simulate)
         st.plotly_chart(fig_relationship_3d, use_container_width=True)
 
@@ -543,6 +537,7 @@ with col2:
         según diferentes niveles de población de frailejones. El punto rojo indica tu configuración actual.
         </p>
         """, unsafe_allow_html=True)
+
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Footer personalizado para Universidad Central

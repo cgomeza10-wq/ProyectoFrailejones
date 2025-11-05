@@ -11,7 +11,7 @@ Los frailejones son plantas clave en los ecosistemas de páramo, desempeñando u
 ## Características
 
 - **Visualizaciones Interactivas**:
-  - Gráficos 2D y 3D para analizar la relación entre la población de frailejones y la producción agrícola.
+  - Gráficos 2D y 3D para analizar la relación entre la población de frailejone.
   - Mapas de riesgo que muestran las zonas más vulnerables a la pérdida de frailejones.
 - **Simulaciones**:
   - Impacto en biodiversidad, producción agrícola y economía basado en parámetros ajustables.

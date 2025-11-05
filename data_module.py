@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 def get_initial_data():
     """
     Genera datos iniciales ficticios sobre frailejones y páramos en Colombia.
@@ -36,7 +37,7 @@ def get_initial_data():
 
     # Datos históricos de cobertura de frailejones (porcentaje del óptimo)
     years = np.arange(1990, 2025)
-    historical_cover = 100 - (0.5 * (years - 1990))  # pérdida del 0.5% anual ficticia
+    historical_cover = 100 - (0.5 * (years - 1990))  # pérdida del 0.5% anual
     historical_cover = np.maximum(historical_cover, 60)  # mínimo del 60%
 
     historical_data = pd.DataFrame({
