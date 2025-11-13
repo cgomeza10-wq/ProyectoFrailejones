@@ -1,0 +1,19 @@
+corte,item,descripcion
+primer_corte,1,"1. Realizar una portada con: Título del proyecto, nombres de los integrantes del proyecto, nombre del docente, y demás información que debe contener una portada de un proyecto."
+primer_corte,2,2.  Objetivos: Un objetivo general y los objetivos específicos.
+primer_corte,3,3. Cronograma de actividades: En una tabla.
+primer_corte,4,4. Planteamiento del problema.
+primer_corte,5,5. Marco teórico.
+segundo_corte,1,1.  Resumen del proyecto
+segundo_corte,2,2. Introducción
+segundo_corte,3,3. Justificación del proyecto
+segundo_corte,4,4. Marco metodológico.
+segundo_corte,5,5. Desarrollo del proyecto
+segundo_corte,6,6. Diagrama de flujo del algoritmo que van a programar o del programa que van a realizar en el proyecto.
+segundo_corte,7,7. Bibliografía.
+segundo_corte,8,8. Parte del programa.
+tercer_corte,1,Desarrollo de visualizaciones 3D interactivas con Plotly
+tercer_corte,2,Implementación del mapa de riesgo con Folium para páramos colombianos
+tercer_corte,3,Creación de métricas económicas y de biodiversidad específicas
+tercer_corte,4,Desarrollo de la interfaz de usuario final con controles avanzados
+tercer_corte,5,Documentación completa del proyecto y validación final del modelo
